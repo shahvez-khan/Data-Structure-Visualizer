@@ -1,6 +1,6 @@
 // Fix: Implement the VisualizerPage component.
 import React, { useState, useCallback } from 'react';
-import { Controls } from '../components/Controls';
+import { Controls } from '../components/controls';
 import { VisualizationArea } from '../components/VisualizationArea';
 import { AiInsights } from '../components/AiInsights';
 import type { Bar, Algorithm } from '../types';
