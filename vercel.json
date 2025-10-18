@@ -1,31 +1,12 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      // Builds the React frontend using the static-build builder
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
+      "source": "/api/explain-algo",
+      "destination": "/api/explain-algo.js"
     },
     {
-      // Builds the secure serverless function using the node builder
-      "src": "api/explain-algo.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    // 1. Route for the secure serverless function (must be handled first)
-    {
-      "src": "/api/explain-algo",
-      "dest": "/api/explain-algo.js"
-    },
-    // 2. Fallback for the React Router (SPA)
-    // This tells Vercel to serve index.html for any request not handled by the API
-    {
-      "src": "/(.*)",
-      "dest": "/dist/index.html"
+      "source": "/(.*)",
+      "destination": "/dist/index.html"
     }
   ]
 }
