@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://<YOUR_GITHUB_USERNAME>.github.io/data-structure-visualizer/",
+  "homepage": "https://<shahvez-khan>.github.io/data-structure-visualizer/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
