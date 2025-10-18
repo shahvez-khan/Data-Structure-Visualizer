@@ -16,14 +16,6 @@ Visualize **sorting algorithms** interactively with **animated bars** and get in
 
 ---
 
-## 📷 Screenshot
-
-![Data Structure Visualizer Screenshot](Screenshot_2025-10-19_at_12.15.55 AM.png)
-
-> Bars represent array elements. Yellow/green highlight indicates current operations during sorting.
-
----
-
 ## 🧩 Supported Algorithms
 
 | Algorithm       | Time Complexity (Avg) | Space Complexity | Stability |
