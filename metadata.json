@@ -1,0 +1,5 @@
+{
+  "name": "AI-Powered Data Structure Visualizer",
+  "description": "An interactive web application that visually demonstrates the Bubble Sort algorithm and uses the Gemini API to provide an educational analysis of its time complexity and performance characteristics.",
+  "requestFramePermissions": []
+}
