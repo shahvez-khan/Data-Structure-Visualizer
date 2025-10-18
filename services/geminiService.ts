@@ -1,11 +1,5 @@
-// Fix: Implement the geminiService to fetch algorithm explanations.
-import { GoogleGenAI } from "@google/genai";
 import type { Algorithm } from '../types';
 
-// Per guidelines, API key must be from process.env.API_KEY
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
-
-const model = 'gemini-2.5-flash';
 
 const algorithmDisplayNames: Record<Algorithm, string> = {
   bubble: 'Bubble Sort',
@@ -16,6 +10,8 @@ const algorithmDisplayNames: Record<Algorithm, string> = {
 
 export const getAlgorithmExplanation = async (algorithm: Algorithm): Promise<string> => {
   const displayName = algorithmDisplayNames[algorithm];
+  
+  // This prompt is sent to the secure serverless function.
   const prompt = `
     Provide a detailed analysis of the ${displayName} algorithm for a computer science student. Format the output as clean markdown.
 
@@ -37,14 +33,25 @@ export const getAlgorithmExplanation = async (algorithm: Algorithm): Promise<str
   `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: model,
-      contents: prompt,
+    // Making a POST request to a relative API endpoint (the secure serverless function)
+    const response = await fetch('/api/explain-algo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
     });
-    // Per guidelines, use response.text
-    return response.text;
+
+    if (!response.ok) {
+        throw new Error(`AI Service failed. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    
+    // Assuming the secure serverless function returns an object { explanation: string }
+    return result.explanation;
   } catch (error) {
-    console.error("Error fetching explanation from Gemini API:", error);
-    return "Could not fetch explanation. Please check your API key and network connection.";
+    console.error("Error fetching explanation from proxy:", error);
+    return "AI insights are unavailable. The API key must be secured using a serverless function (Vercel/Netlify).";
   }
 };
